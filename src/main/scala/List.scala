@@ -24,6 +24,18 @@ sealed trait List[+A] {
   }
 
   def length: Int = this.foldRight(0)((_, b) => 1 + b)
+
+  def foldLeft[B](z: B)(f: (B, A) => B): B = {
+    def loop(list: List[A], z: B, res: B)(f: (B, A) => B): B = {
+      list match {
+        case Nil => res
+        case Cons(h, t) => loop(t, z, f(res, h))(f)
+      }
+    }
+    loop(this, z, z)(f)
+  }
+
+  def reverseFold = this.foldLeft(Nil:List[A])((b, a) => Cons(a, b))
 }
 
 case object Nil extends List[Nothing]

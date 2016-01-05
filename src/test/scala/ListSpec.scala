@@ -92,4 +92,24 @@ class ListSpec extends Specification {
     }
   }
 
+  "10 fold left" should {
+    "11 sum elements of list" in {
+      List(1, 2, 3).foldLeft(0)(_ + _) mustEqual 6
+    }
+
+    "11 multiply elements of list" in {
+      List(1, 2, 3).foldLeft(1)(_ * _) mustEqual 6
+    }
+
+    "11 calculate length of list" in {
+      List(8, 9, 11, 12).foldLeft(0)((b, a) => 1 + b) mustEqual 4
+    }
+  }
+
+  "12 reverse fold" should {
+    "reverse a list" in {
+      List(1,2,3).reverseFold mustEqual Cons(3, Cons(2, Cons(1, Nil)))
+    }
+  }
+
 }
