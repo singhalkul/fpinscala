@@ -8,7 +8,22 @@ sealed trait List[+A] {
 
   def setHead[B >: A] (x: B): List[B] = ???
 
-  def init: List[A] = ???
+  def init: List[A] = {
+    this match {
+      case Nil => ???
+      case Cons(h, Nil) => Nil
+      case Cons(h, t) => Cons(h, tail.init)
+    }
+  }
+
+  def foldRight[B](z: B)(f: (A, B) => B): B = {
+    this match {
+      case Nil => z
+      case Cons(h, t) => f(h, t.foldRight(z)(f))
+    }
+  }
+
+  def length: Int = this.foldRight(0)((_, b) => 1 + b)
 }
 
 case object Nil extends List[Nothing]
@@ -24,13 +39,6 @@ case class Cons[+A](head: A, override val tail: List[A]) extends List[A] {
   override def dropWhile(f: A => Boolean): List[A] = if (f(head)) tail.dropWhile(f) else this
 
   override def setHead[B >: A] (x: B): List[B] = Cons(x, tail)
-
-  override def init: List[A] = {
-      this match {
-        case Cons(h, Nil) => Nil
-        case Cons(h, t) => Cons(h, tail.init)
-      }
-  }
 }
 
 object List {

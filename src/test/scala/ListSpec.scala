@@ -66,4 +66,30 @@ class ListSpec extends Specification {
     }
   }
 
+  "fold right" should {
+
+    "sum elements of list" in {
+      List(1,2,3).foldRight(0)(_+_) mustEqual 6
+    }
+
+    "multiply elements of list" in {
+      List(1,2,3).foldRight(1)(_*_) mustEqual 6
+    }
+
+    "create list" in {
+      List(1,2,3).foldRight(Nil: List[Int])(Cons(_, _)) mustEqual Cons(1, Cons(2, Cons(3, Nil)))
+    }
+  }
+
+  "length" should {
+
+    "return 3 for list of 3 elements" in {
+      List('a', 'b', 'c').length mustEqual 3
+    }
+
+    "return 0 for empty list" in {
+      Nil.length mustEqual 0
+    }
+  }
+
 }
