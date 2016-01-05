@@ -51,7 +51,7 @@ class ListSpec extends Specification {
 
   "set head" should {
     "replace head in the list" in {
-      List(1,2).setHead(3) mustEqual Cons(3, Cons(2, Nil))
+      List(1, 2).setHead(3) mustEqual Cons(3, Cons(2, Nil))
     }
   }
 
@@ -62,22 +62,22 @@ class ListSpec extends Specification {
     }
 
     "return first 2 elements for list of size 3" in {
-      List(1,2,3).init mustEqual Cons(1, Cons(2, Nil))
+      List(1, 2, 3).init mustEqual Cons(1, Cons(2, Nil))
     }
   }
 
   "fold right" should {
 
     "sum elements of list" in {
-      List(1,2,3).foldRight(0)(_+_) mustEqual 6
+      List(1, 2, 3).foldRight(0)(_ + _) mustEqual 6
     }
 
     "multiply elements of list" in {
-      List(1,2,3).foldRight(1)(_*_) mustEqual 6
+      List(1, 2, 3).foldRight(1)(_ * _) mustEqual 6
     }
 
     "create list" in {
-      List(1,2,3).foldRight(Nil: List[Int])(Cons(_, _)) mustEqual Cons(1, Cons(2, Cons(3, Nil)))
+      List(1, 2, 3).foldRight(Nil: List[Int])(Cons(_, _)) mustEqual Cons(1, Cons(2, Cons(3, Nil)))
     }
   }
 
