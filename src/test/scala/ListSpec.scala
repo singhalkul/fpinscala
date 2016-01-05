@@ -2,7 +2,7 @@ import org.specs2.mutable.Specification
 
 class ListSpec extends Specification {
 
-  "companion object" should {
+  "1 list object" should {
     "create empty list" in {
       List() mustEqual Nil
     }
@@ -16,13 +16,13 @@ class ListSpec extends Specification {
     }
   }
 
-  "tail" should {
+  "2 tail" should {
     "remove first element" in {
       List(1, 2, 3).tail mustEqual Cons(2, Cons(3, Nil))
     }
   }
 
-  "drop" should {
+  "3 drop" should {
     "remove 1 element from the list of 1" in {
       List(1).drop(1) mustEqual Nil
     }
@@ -33,7 +33,7 @@ class ListSpec extends Specification {
 
   }
 
-  "drop while" should {
+  "4 drop while" should {
 
     "drop till 1 is reached" in {
       List(1, 2, 3).dropWhile(_ == 1) mustEqual Cons(2, Cons(3, Nil))
@@ -49,13 +49,13 @@ class ListSpec extends Specification {
 
   }
 
-  "set head" should {
+  "5 set head" should {
     "replace head in the list" in {
       List(1, 2).setHead(3) mustEqual Cons(3, Cons(2, Nil))
     }
   }
 
-  "init" should {
+  "6 init" should {
 
     "return Nil for list of size 1" in {
       List(1).init mustEqual Nil
@@ -76,12 +76,12 @@ class ListSpec extends Specification {
       List(1, 2, 3).foldRight(1)(_ * _) mustEqual 6
     }
 
-    "create list" in {
+    "8 create list" in {
       List(1, 2, 3).foldRight(Nil: List[Int])(Cons(_, _)) mustEqual Cons(1, Cons(2, Cons(3, Nil)))
     }
   }
 
-  "length" should {
+  "9 .length" should {
 
     "return 3 for list of 3 elements" in {
       List('a', 'b', 'c').length mustEqual 3
