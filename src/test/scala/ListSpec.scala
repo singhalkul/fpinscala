@@ -49,4 +49,21 @@ class ListSpec extends Specification {
 
   }
 
+  "set head" should {
+    "replace head in the list" in {
+      List(1,2).setHead(3) mustEqual Cons(3, Cons(2, Nil))
+    }
+  }
+
+  "init" should {
+
+    "return Nil for list of size 1" in {
+      List(1).init mustEqual Nil
+    }
+
+    "return first 2 elements for list of size 3" in {
+      List(1,2,3).init mustEqual Cons(1, Cons(2, Nil))
+    }
+  }
+
 }
