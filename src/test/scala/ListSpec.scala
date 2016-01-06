@@ -84,11 +84,11 @@ class ListSpec extends Specification {
   "9 .length" should {
 
     "return 3 for list of 3 elements" in {
-      List('a', 'b', 'c').length mustEqual 3
+      List('a', 'b', 'c').lengthUsingFoldRight mustEqual 3
     }
 
     "return 0 for empty list" in {
-      Nil.length mustEqual 0
+      Nil.lengthUsingFoldRight mustEqual 0
     }
   }
 
@@ -108,7 +108,25 @@ class ListSpec extends Specification {
 
   "12 reverse fold" should {
     "reverse a list" in {
-      List(1,2,3).reverseFold mustEqual Cons(3, Cons(2, Cons(1, Nil)))
+      List(1, 2, 3).reverseUsingFoldLeft mustEqual Cons(3, Cons(2, Cons(1, Nil)))
+    }
+  }
+
+  "13 fold left using fold right" should {
+    "calculate length of list" in {
+      List(8, 9, 11, 12).foldLeftViaFoldRight(0)((b, a) => 1 + b) mustEqual 4
+    }
+  }
+
+  "13 fold right using fold left" should {
+    "create list" in {
+      List(1, 2, 3).foldRightViaFoldLeft(Nil: List[Int])(Cons(_, _)) mustEqual Cons(1, Cons(2, Cons(3, Nil)))
+    }
+  }
+
+  "14 append" should {
+    "join 2 lists" in {
+      List(1, 2).append(List(3, 4)) mustEqual Cons(1, Cons(2, Cons(3, Cons(4, Nil))))
     }
   }
 

@@ -23,7 +23,7 @@ sealed trait List[+A] {
     }
   }
 
-  def length: Int = this.foldRight(0)((_, b) => 1 + b)
+  def lengthUsingFoldRight: Int = this.foldRight(0)((_, b) => 1 + b)
 
   def foldLeft[B](z: B)(f: (B, A) => B): B = {
     def loop(list: List[A], z: B, res: B)(f: (B, A) => B): B = {
@@ -35,7 +35,17 @@ sealed trait List[+A] {
     loop(this, z, z)(f)
   }
 
-  def reverseFold = this.foldLeft(Nil:List[A])((b, a) => Cons(a, b))
+  def reverseUsingFoldLeft = this.foldLeft(Nil:List[A])((b, a) => Cons(a, b))
+
+  def foldLeftViaFoldRight[B](z: B)(f: (B, A) => B): B = {
+    this.foldRight((b: B) => b)((a, g) => b => g(f(b,a)))(z)
+  }
+
+  def foldRightViaFoldLeft[B](z: B)(f: (A, B) => B): B = {
+    this.foldLeft((b: B) => b)((g, a) => b => g(f(a, b)))(z)
+  }
+
+  def append[B >: A](list: List[B]): List[B] = this.foldRight(list)(Cons(_, _))
 }
 
 case object Nil extends List[Nothing]
