@@ -45,7 +45,9 @@ sealed trait List[+A] {
     this.foldLeft((b: B) => b)((g, a) => b => g(f(a, b)))(z)
   }
 
-  def append[B >: A](list: List[B]): List[B] = this.foldRight(list)(Cons(_, _))
+  def appendUsingFoldRight[B >: A](list: List[B]): List[B] = this.foldRight(list)(Cons(_, _))
+
+  def flattenUsingFold = this.foldLeft(Nil:List[A])((b: List[A], a: A) => b.appendUsingFoldRight(a.asInstanceOf[List[A]]))
 }
 
 case object Nil extends List[Nothing]

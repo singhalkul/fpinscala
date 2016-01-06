@@ -124,9 +124,16 @@ class ListSpec extends Specification {
     }
   }
 
-  "14 append" should {
+  "14 append using fold right" should {
     "join 2 lists" in {
-      List(1, 2).append(List(3, 4)) mustEqual Cons(1, Cons(2, Cons(3, Cons(4, Nil))))
+      List(1, 2).appendUsingFoldRight(List(3, 4)) mustEqual Cons(1, Cons(2, Cons(3, Cons(4, Nil))))
+    }
+  }
+
+  "15 flatten using fold" should {
+    "flatten a list" in {
+      val list: List[List[Int]] = List(List(1), List(2))
+      list.flattenUsingFold mustEqual Cons(1, Cons(2, Nil))
     }
   }
 
