@@ -137,4 +137,34 @@ class ListSpec extends Specification {
     }
   }
 
+  "16 add one to all elements" should {
+    "in list" in {
+      List(1, 2, 3).foldRight(Nil: List[Int])((h, t) => Cons(h + 1, t)) mustEqual Cons(2, Cons(3, Cons(4, Nil)))
+    }
+  }
+
+  "17 turn all doubles to strings" should {
+    "in list" in {
+      List(1.0, 2.0, 3.0).foldRight(Nil: List[String])((h, t) => Cons(h.toString, t)) mustEqual Cons("1.0", Cons("2.0", Cons("3.0", Nil)))
+    }
+  }
+
+  "18 map function using fold right" should {
+    "turn doubles to strings in a list" in {
+      List(1.0, 2.0, 3.0).map(_.toString) mustEqual Cons("1.0", Cons("2.0", Cons("3.0", Nil)))
+    }
+  }
+
+  "19 filter using fold right" should {
+    "filter elements" in {
+      List(1, 2, 3).filter(_ > 1) mustEqual Cons(2, Cons(3, Nil))
+    }
+  }
+
+  "20 flat map using fold" should {
+    "flatten" in {
+      List(1, 2).flatMap(a => List(a,a)) mustEqual Cons(1, Cons(1, Cons(2, Cons(2, Nil))))
+    }
+  }
+
 }
