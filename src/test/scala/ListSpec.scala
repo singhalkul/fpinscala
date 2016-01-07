@@ -163,8 +163,19 @@ class ListSpec extends Specification {
 
   "20 flat map using fold" should {
     "flatten" in {
-      List(1, 2).flatMap(a => List(a,a)) mustEqual Cons(1, Cons(1, Cons(2, Cons(2, Nil))))
+      List(1, 2).flatMap(a => List(a, a)) mustEqual Cons(1, Cons(1, Cons(2, Cons(2, Nil))))
     }
   }
 
+  "21 filter using flat map" should {
+    "filter elements" in {
+      List(1, 2, 3).filterUsingFlatMap(_ > 1) mustEqual Cons(2, Cons(3, Nil))
+    }
+  }
+
+  "22, 23 add pairs" should {
+    "create list by adding individual elements of 2 lists" in {
+      List.addPairs(List(1, 3, 5), List(2, 4, 6), (a: Int, b: Int) => a + b) mustEqual Cons(3, Cons(7, Cons(11, Nil)))
+    }
+  }
 }
